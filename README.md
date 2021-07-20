@@ -1,3 +1,45 @@
+geOrchestra CAS customizations
+===============================
+
+This project has been created from the [suggested github template](https://travis-ci.org/apereo/cas-overlay-template).
+
+It contains some customizations to suit with the conventions followed by the geOrchestra project.
+
+geOrchestra customizations
+=============================
+
+* configuration into `/etc/georchestra/cas` instead of `/etc/cas`.
+* not building a runnable artifact, nor including any tomcat or jetty dependencies
+  (see the `gradle.properties` file)
+* A basic custom theme named "georchestra" has been generated using `./gradlew generateTheme`
+* ... more to come
+
+Custom georchestra build
+===========================
+
+## Building a simple war
+
+```
+./gradlew build
+```
+
+## Building a docker image
+
+Creating the exploded webapp with the following:
+
+```
+$ ./gradlew explodeWarOnly
+```
+
+Then Build a docker image using:
+
+```
+$ docker build -t georchestra/cas:6.3.5 .
+```
+
+Contrary to upstream, we don't make use of the jib gradle plugin to build the docker image.
+
+
 CAS Overlay Template [![Build Status](https://travis-ci.org/apereo/cas-overlay-template.svg?branch=master)](https://travis-ci.org/apereo/cas-overlay-template)
 =======================
 
@@ -5,7 +47,7 @@ Generic CAS WAR overlay to exercise the latest versions of CAS. This overlay cou
 
 # Versions
 
-- CAS `6.4.x`
+- CAS `6.3.5`
 - JDK `11`
 
 # Overview

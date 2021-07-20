@@ -1,5 +1,10 @@
 target/**
-build/**
+build/classes/**
+build/generated/**
+build/libs/**
+build/overlays/**
+build/resources/**
+build/tmp/**
 bin/**
 .idea/**
 .history/**

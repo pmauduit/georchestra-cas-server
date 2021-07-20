@@ -20,7 +20,6 @@ buildscript {
     dependencies {
         classpath "de.undercouch:gradle-download-task:${project.gradleDownloadTaskVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${project.springBootVersion}"
-        classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${project.jibVersion}"
         classpath "io.freefair.gradle:maven-plugin:${project.gradleMavenPluginVersion}"
         classpath "io.freefair.gradle:lombok-plugin:${project.gradleLombokPluginVersion}"
     }
@@ -67,7 +66,6 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 
 apply from: rootProject.file("gradle/springboot.gradle")
-apply from: rootProject.file("gradle/dockerjib.gradle")
 
 dependencies {
     // Add modules in format compatible with overlay casModules property
@@ -82,15 +80,9 @@ dependencies {
     }
     // CAS dependencies/modules may be listed here statically...
     implementation "org.apereo.cas:cas-server-webapp-init:${casServerVersion}"
+
+    providedCompile "org.springframework.boot:spring-boot:${springBootVersion}"
 }
-
-tasks.findByName("jibDockerBuild")
-    .dependsOn(copyWebAppIntoJib, copyConfigIntoJib)
-    .finalizedBy(deleteWebAppFromJib)
-
-tasks.findByName("jib")
-    .dependsOn(copyWebAppIntoJib, copyConfigIntoJib)
-    .finalizedBy(deleteWebAppFromJib)
 
 configurations.all {
     resolutionStrategy {
