@@ -34,7 +34,7 @@ $ ./gradlew explodeWarOnly
 Then Build a docker image using:
 
 ```
-$ docker build -t georchestra/cas:6.3.5 .
+$ docker build -t georchestra/cas:6.3 .
 ```
 
 Contrary to upstream, we don't make use of the jib gradle plugin to build the docker image.

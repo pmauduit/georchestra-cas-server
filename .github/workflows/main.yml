@@ -24,7 +24,7 @@ jobs:
 
       - name: Build a docker image
         run: |
-          docker build -t georchestra/cas:6.3.5-dev .
+          docker build -t georchestra/cas:6.3-dev .
       
       - name: Build a war file
         run: |
@@ -46,4 +46,4 @@ jobs:
       - name: Publish the docker image
         if: github.repository == 'georchestra/georchestra-cas-server' && github.ref == 'refs/heads/master'
         run: |
-          docker push georchestra/cas:6.3.5-dev
+          docker push georchestra/cas:6.3-dev
