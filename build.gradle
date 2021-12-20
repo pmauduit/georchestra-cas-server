@@ -73,6 +73,8 @@ dependencies {
     implementation "org.apereo.cas:cas-server-webapp-init:${casServerVersion}"
     implementation "org.apereo.cas:cas-server-support-json-service-registry:${casServerVersion}"
     implementation "org.apereo.cas:cas-server-support-ldap:${casServerVersion}"
+    implementation "org.apereo.cas:cas-server-support-pac4j-webflow:${casServerVersion}"
+    implementation "org.apereo.cas:cas-server-support-oauth-webflow:${casServerVersion}"
 
     providedCompile "org.springframework.boot:spring-boot:${springBootVersion}"
 }
