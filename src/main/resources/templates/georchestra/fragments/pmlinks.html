@@ -36,11 +36,18 @@
                 onclick="document.getElementById('passwordManagementUserForm').submit();" />
             <br><br>
         </form>
-        <div th:unless="${passwordManagementEnabled}">
+        <div th:unless="${passwordManagementEnabled}" id="resetPasswordLink">
             <br />
             <span class="mdi mdi-account-question"></span>
             <span th:utext="#{screen.pm.button.forgotpwd('/console/account/passwordRecovery')}">Forgot your password?</span>
         </div>
+        <div th:unless="${passwordManagementEnabled}" id="createAccountLink">
+            <br />
+            <span class="mdi mdi-account-question"></span>
+            <a href="/console/account/new">Créer un compte</a>
+        </div>
+    <p/>
+</div>
     </div>
 </body>
 
