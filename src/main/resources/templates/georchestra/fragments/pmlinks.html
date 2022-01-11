@@ -37,10 +37,9 @@
             <br><br>
         </form>
         <div th:unless="${passwordManagementEnabled}" id="resetPasswordLink">
-            <br />
             <span class="mdi mdi-account-question"></span>
+            <a href="/console/account/new">S'inscrire</a> -
             <span th:utext="#{screen.pm.button.forgotpwd('/console/account/passwordRecovery')}">Forgot your password?</span>
-            - <a href="/console/account/new">Créer un compte</a>
         </div>
     <p/>
 </div>
