@@ -36,7 +36,9 @@
             <br><br>
         </form>
         <div th:unless="${passwordManagementEnabled}" id="resetPasswordLink">
-            <a href="/console/account/new">S'inscrire</a> -
+            <a href="/console/account/new">
+                <span th:utext="#{screen.welcome.button.register}">Register</span>
+            </a> -
             <span th:utext="#{screen.pm.button.forgotpwd('/console/account/passwordRecovery')}">Forgot your password?</span>
         </div>
     <p/>
