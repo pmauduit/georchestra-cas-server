@@ -1,3 +1,5 @@
+import org.ajoberstar.grgit.Grgit
+
 buildscript {
     repositories {
         mavenLocal()
@@ -25,6 +27,10 @@ buildscript {
 
         classpath "com.netflix.nebula:gradle-ospackage-plugin:9.0.0"
     }
+}
+
+plugins {
+  id 'org.ajoberstar.grgit' version '4.1.1' apply false
 }
 
 repositories {
@@ -112,13 +118,35 @@ idea {
     }
 }
 
+task checkoutDatadir() {
+  delete "$buildDir/datadir"
+  doLast {
+     def grgit = Grgit.clone(dir: "$buildDir/datadir", uri: "https://github.com/georchestra/datadir.git", refToCheckout: datadirRef)
+   }
+}
+
 task deb(type: Deb) {
-    release = 1
+    version = getDebianVersion()
     packageName = 'georchestra-cas'
     from ('build/libs/cas.war') {
       into '/usr/share/lib/georchestra-cas'
     }
+    from ("$buildDir/datadir/cas") {
+      into '/etc/georchestra'
+    }
     link "/usr/share/lib/georchestra-cas/cas-generic.war", "/usr/share/lib/georchestra-cas/cas.war"
 }
 
-deb.dependsOn build
+deb.dependsOn build, checkoutDatadir
+
+def getDebianVersion() {
+    if (System.properties["debian.version"] != null) {
+      return System.properties["debian.version"]
+    }
+    // if we are on master, then the debian package version should look like this:
+    // 99.master.202201251523~7c61adb-1
+    def commitId = 'git rev-parse --verify --short HEAD'.execute().text.trim()
+    def branchName = 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
+
+    "99.${branchName}.${new Date().format('yyyyMMddhhmm')}~${commitId}"
+}
