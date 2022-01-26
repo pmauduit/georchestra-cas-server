@@ -9,7 +9,6 @@ VOLUME [ "/tmp", "/run/jetty" ]
 
 EXPOSE 8080
 
-COPY ./etc /etc
 COPY build/cas /var/lib/jetty/webapps/cas
 
 ENV XMS=256M XMX=1G
