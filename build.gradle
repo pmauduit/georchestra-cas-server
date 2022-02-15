@@ -143,10 +143,9 @@ def getDebianVersion() {
     if (System.properties["debian.version"] != null) {
       return System.properties["debian.version"]
     }
-    // if we are on master, then the debian package version should look like this:
-    // 99.master.202201251523~7c61adb-1
+
     def commitId = 'git rev-parse --verify --short HEAD'.execute().text.trim()
     def branchName = 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
 
-    "99.${branchName}.${new Date().format('yyyyMMddhhmm')}~${commitId}"
+    "${casServerVersion}.${branchName}.${new Date().format('yyyyMMddhhmm')}~${commitId}"
 }
