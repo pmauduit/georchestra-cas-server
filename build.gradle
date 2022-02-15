@@ -1,19 +1,21 @@
+import org.ajoberstar.grgit.Grgit
+
 buildscript {
     repositories {
         mavenLocal()
         gradlePluginPortal()
         mavenCentral()
         jcenter()
-        maven { 
-            url "https://repo.spring.io/libs-milestone" 
+        maven {
+            url "https://repo.spring.io/libs-milestone"
             mavenContent { releasesOnly() }
         }
-        maven { 
-            url "https://repo.spring.io/libs-snapshot" 
+        maven {
+            url "https://repo.spring.io/libs-snapshot"
             mavenContent { snapshotsOnly() }
         }
-        maven { 
-            url "https://plugins.gradle.org/m2/" 
+        maven {
+            url "https://plugins.gradle.org/m2/"
             mavenContent { releasesOnly() }
         }
     }
@@ -22,32 +24,38 @@ buildscript {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${project.springBootVersion}"
         classpath "io.freefair.gradle:maven-plugin:${project.gradleMavenPluginVersion}"
         classpath "io.freefair.gradle:lombok-plugin:${project.gradleLombokPluginVersion}"
+
+        classpath "com.netflix.nebula:gradle-ospackage-plugin:9.0.0"
     }
+}
+
+plugins {
+  id 'org.ajoberstar.grgit' version '4.1.1' apply false
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-    maven { 
-        url "https://oss.sonatype.org/content/repositories/snapshots" 
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
         mavenContent { snapshotsOnly() }
     }
-    maven { 
+    maven {
         mavenContent { releasesOnly() }
-        url "https://build.shibboleth.net/nexus/content/repositories/releases/" 
+        url "https://build.shibboleth.net/nexus/content/repositories/releases/"
     }
-    maven { 
+    maven {
         mavenContent { releasesOnly() }
-        url "https://repo.spring.io/milestone/" 
+        url "https://repo.spring.io/milestone/"
     }
-    maven { 
-        url "https://repo.spring.io/snapshot/" 
+    maven {
+        url "https://repo.spring.io/snapshot/"
         mavenContent { snapshotsOnly() }
     }
-    maven { 
+    maven {
         mavenContent { snapshotsOnly() }
-        url "https://oss.jfrog.org/artifactory/oss-snapshot-local" 
+        url "https://oss.jfrog.org/artifactory/oss-snapshot-local"
     }
 }
 
@@ -66,6 +74,9 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 
 apply from: rootProject.file("gradle/springboot.gradle")
+
+
+apply plugin: "nebula.deb"
 
 dependencies {
 
@@ -105,4 +116,36 @@ idea {
         downloadJavadoc = true
         downloadSources = true
     }
+}
+
+task checkoutDatadir() {
+  delete "$buildDir/datadir"
+  doLast {
+     def grgit = Grgit.clone(dir: "$buildDir/datadir", uri: "https://github.com/georchestra/datadir.git", refToCheckout: datadirRef)
+   }
+}
+
+task deb(type: Deb) {
+    version = getDebianVersion()
+    packageName = 'georchestra-cas'
+    from ('build/libs/cas.war') {
+      into '/usr/share/lib/georchestra-cas'
+    }
+    from ("$buildDir/datadir/cas") {
+      into '/etc/georchestra'
+    }
+    link "/usr/share/lib/georchestra-cas/cas-generic.war", "/usr/share/lib/georchestra-cas/cas.war"
+}
+
+deb.dependsOn build, checkoutDatadir
+
+def getDebianVersion() {
+    if (System.properties["debian.version"] != null) {
+      return System.properties["debian.version"]
+    }
+
+    def commitId = 'git rev-parse --verify --short HEAD'.execute().text.trim()
+    def branchName = 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
+
+    "${casServerVersion}.${branchName}.${new Date().format('yyyyMMddhhmm')}~${commitId}"
 }
