@@ -132,7 +132,7 @@ task deb(type: Deb) {
       into '/usr/share/lib/georchestra-cas'
     }
     from ("$buildDir/datadir/cas") {
-      into '/etc/georchestra'
+      into '/etc/georchestra/cas'
     }
     link "/usr/share/lib/georchestra-cas/cas-generic.war", "/usr/share/lib/georchestra-cas/cas.war"
 }
