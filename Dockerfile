@@ -20,7 +20,6 @@ CMD ["sh", "-c", "exec java \
         -XX:-UsePerfData \
         ${JAVA_OPTIONS} \
         -DCAS_BANNER_SKIP=true \
-        -DCAS_UPDATE_CHECK_ENABLED=true \
         -Dcas.standalone.configurationDirectory=/etc/georchestra/cas/config \
         -Djetty.httpConfig.sendServerVersion=false \
         -Djetty.jmxremote.rmiregistryhost=0.0.0.0 \
