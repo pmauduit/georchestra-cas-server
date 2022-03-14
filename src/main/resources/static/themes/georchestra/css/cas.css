@@ -596,8 +596,7 @@ text-align: justify;
 }
 
 #serviceui {
-    background-color: #17a3b844;
-    border-radius: 4px;
+    display: none;
 }
 
 #heroimg {
