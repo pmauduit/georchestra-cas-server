@@ -2,6 +2,7 @@
     let cas = {
         init: function () {
             cas.attachFields();
+            cas.fixLabels();
             material.autoInit();
         },
         attachFields: function () {
@@ -32,6 +33,24 @@
                 console.log('caps off')
                 ev.target.parentElement.classList.remove('caps-on');
             }
+        },
+        //fix for issue with chrome autofill (https://github.com/material-components/material-components-web/issues/4447)
+        fixLabels: function () {
+            window.setTimeout(() => {
+                document
+                  .querySelectorAll('.mdc-text-field__input')
+                  .forEach(el => {
+                    const textField = el.parentNode;
+                    const label = textField.querySelector('.mdc-floating-label');
+                    if (label) {
+                      label.classList.add('mdc-floating-label--float-above');
+                    }
+                    const notchedOutline = textField.querySelector('.mdc-notched-outline__notch');
+                    if (notchedOutline) {
+                        notchedOutline.style.setProperty('border-top', 'none')
+                    }
+                  });
+            }, 300);
         }
     }
 
