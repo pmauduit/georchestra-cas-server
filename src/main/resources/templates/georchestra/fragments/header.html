@@ -14,7 +14,7 @@
 <div th:fragment="header">
     <iframe
             th:src="${@georchestraConfiguration.getHeaderUrl()}"
-            th:style="'width:100%;height:'+ ${@georchestraConfiguration.getHeaderHeight()}+';border:none;overflow:hidden;'" scrolling="no" frameborder="0">
+            th:style="'width:100%;height:'+ ${@georchestraConfiguration.getHeaderHeight()}+'px;border:none;overflow:hidden;'" scrolling="no" frameborder="0">
     </iframe>
 </div>
 </body>
