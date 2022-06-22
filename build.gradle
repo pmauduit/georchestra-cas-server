@@ -86,6 +86,9 @@ dependencies {
     implementation "org.apereo.cas:cas-server-support-ldap:${casServerVersion}"
     implementation "org.apereo.cas:cas-server-support-pac4j-webflow:${casServerVersion}"
     implementation "org.apereo.cas:cas-server-support-oauth-webflow:${casServerVersion}"
+    implementation "org.apereo.cas:cas-server-support-memcached-core:${casServerVersion}"
+    implementation "org.apereo.cas:cas-server-support-memcached-ticket-registry:${casServerVersion}"
+    implementation "org.apereo.cas:cas-server-support-memcached-spy:${casServerVersion}"
 
     providedCompile "org.springframework.boot:spring-boot:${springBootVersion}"
 }
