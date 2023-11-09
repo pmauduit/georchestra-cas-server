@@ -10,8 +10,12 @@ VOLUME [ "/tmp", "/run/jetty" ]
 EXPOSE 8080
 
 COPY --chown=jetty:jetty build/cas /var/lib/jetty/webapps/cas
-        
+COPY --chown=jetty:jetty docker-entrypoint.sh /
+COPY --chown=jetty:jetty docker-entrypoint.d /docker-entrypoint.d/
+
 ENV XMS=256M XMX=1G
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD ["sh", "-c", "exec java \
         -Djava.io.tmpdir=/tmp/jetty \
