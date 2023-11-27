@@ -12,10 +12,11 @@
 
 <body>
 <div th:fragment="header">
-    <iframe
-            th:src="${@georchestraConfiguration.getHeaderUrl()}"
-            th:style="'width:100%;height:'+ ${@georchestraConfiguration.getHeaderHeight()}+'px;border:none;overflow:hidden;'" scrolling="no" frameborder="0">
-    </iframe>
+    <geor-header th:style="'width:100%;height:'+ ${@georchestraConfiguration.getHeaderHeight()}+'px;border:none;overflow:hidden;'"
+                 th:legacy-url="${@georchestraConfiguration.getHeaderUrl()}"
+                 th:legacy-header="${@georchestraConfiguration.isUseLegacyHeader()}"
+    ></geor-header>
+    <script th:src="${@georchestraConfiguration.getHeaderScript()}"></script>
 </div>
 </body>
 

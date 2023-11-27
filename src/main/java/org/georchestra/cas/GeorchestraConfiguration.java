@@ -1,6 +1,7 @@
 package org.georchestra.cas;
 
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,9 +17,16 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 public class GeorchestraConfiguration {
 
+    @Value( "${useLegacyHeader:false}" )
+    boolean useLegacyHeader = false;
+
     @Value( "${headerUrl}" )
     String headerUrl;
 
     @Value("${headerHeight}")
     String headerHeight;
+
+    @Value("${headerScript}")
+    String headerScript;
+
 }
