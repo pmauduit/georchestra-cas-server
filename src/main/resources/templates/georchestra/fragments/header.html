@@ -15,6 +15,7 @@
     <geor-header th:style="'width:100%;height:'+ ${@georchestraConfiguration.getHeaderHeight()}+'px;border:none;overflow:hidden;'"
                  th:legacy-url="${@georchestraConfiguration.getHeaderUrl()}"
                  th:legacy-header="${@georchestraConfiguration.isUseLegacyHeader()}"
+                 th:logo-url="${@georchestraConfiguration.getHeaderLogo()}"
     ></geor-header>
     <script th:src="${@georchestraConfiguration.getHeaderScript()}"></script>
 </div>
