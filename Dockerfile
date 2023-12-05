@@ -3,15 +3,23 @@ FROM jetty:9.4-jre11
 LABEL "Organization"="geOrchestra"
 LABEL "Description"="CAS server webapp"
 
+USER root
+RUN mkdir -p /docker-entrypoint.d
+RUN chown jetty:jetty /docker-entrypoint.d
+USER jetty
+
 RUN java -jar "$JETTY_HOME/start.jar" --create-startd --add-to-start=jmx,jmx-remote,stats,gzip,http-forwarded
 
 VOLUME [ "/tmp", "/run/jetty" ]
 
 EXPOSE 8080
 
-COPY build/cas /var/lib/jetty/webapps/cas
+COPY --chown=jetty:jetty build/cas /var/lib/jetty/webapps/cas
+COPY --chown=jetty:jetty docker/docker-entrypoint.sh /
 
 ENV XMS=256M XMX=1G
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD ["sh", "-c", "exec java \
         -Djava.io.tmpdir=/tmp/jetty \
