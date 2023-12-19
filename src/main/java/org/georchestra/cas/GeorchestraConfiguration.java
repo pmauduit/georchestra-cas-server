@@ -29,7 +29,10 @@ public class GeorchestraConfiguration {
     @Value("${headerScript:https://cdn.jsdelivr.net/gh/georchestra/header@dist/header.js}")
     String headerScript;
 
-    @Value("${headerLogo:https://www.georchestra.org/public/georchestra-logo.svg}")
-    String headerLogo;
+    @Value("${logoUrl:https://www.georchestra.org/public/georchestra-logo.svg}")
+    String logoUrl;
+
+    @Value("${georchestraStylesheet:}")
+    String georchestraStylesheet;
 
 }
