@@ -88,6 +88,7 @@ dependencies {
     implementation "org.apereo.cas:cas-server-support-pac4j-webflow:${casServerVersion}"
     implementation "org.apereo.cas:cas-server-support-oauth-webflow:${casServerVersion}"
     implementation "org.apereo.cas:cas-server-support-oidc:${casServerVersion}"
+    implementation "org.apereo.cas:cas-server-support-saml-idp:${casServerVersion}"
     implementation group: 'io.sentry', name: 'sentry-log4j2', version: '6.10.0'
 
     providedCompile "org.springframework.boot:spring-boot:${springBootVersion}"
