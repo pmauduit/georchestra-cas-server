@@ -14,12 +14,13 @@
 
 -	**Where to file issues**:  
      [https://github.com/georchestra/georchestra/issues](https://github.com/georchestra/georchestra/issues)
+     [https://github.com/georchestra/georchestra-cas-server/issues](https://github.com/georchestra/georchestra-cas-server/issues)
 
 -	**Supported architectures**:   
      [`amd64`](https://hub.docker.com/r/amd64/docker/)
 
 -	**Source of this description**:  
-     [docs repo's `analytics/` directory](https://github.com/georchestra/georchestra/blob/master/analytics/DOCKER_HUB.md)
+     [docs repo's directory](https://github.com/georchestra/georchestra-cas-server/blob/master/DOCKER_HUB.md)
 
 # What is `georchestra/cas`
 
@@ -29,15 +30,15 @@
 
 # How to use this image
 
-As for every other geOrchestra webapp, its configuration resides in the data directory ([datadir](https://github.com/georchestra/datadir)), typically something like /etc/georchestra, where it expects to find a analytics sub-directory.
+As for every other geOrchestra webapp, its configuration resides in the data directory ([datadir](https://github.com/georchestra/datadir)), typically something like /etc/georchestra, where it expects to find a cas sub-directory.
 
 It is recommended to use the official docker composition: https://github.com/georchestra/docker.
 
-For this specific component, see the section `analytics` in the [`georchestra/docker/docker-compose.yml`](https://github.com/georchestra/docker/blob/master/docker-compose.yml) file.
+For this specific component, see the section `cas` in the [`georchestra/docker/docker-compose.yml`](https://github.com/georchestra/docker/blob/master/docker-compose.yml) file.
 
 ## Where is it built
 
-This image is build using maven : `../mvnw package docker:build -Pdocker` in `georchestra` repo `analytics/` folder.
+This image is build using Dockerfile in `cas` repo. 
 
 # License
 
