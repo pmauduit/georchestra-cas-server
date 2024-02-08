@@ -61,7 +61,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           repository: georchestra/cas
           readme-filepath: ./DOCKER_HUB.md
-          short-description: 'Cas module for geOrchestra SDI'
+          short-description: 'Cas module for the geOrchestra SDI'
 
       - name: Publish the docker image (release / tag)
         if: contains(github.ref, 'refs/tags/') && github.repository == 'georchestra/georchestra-cas-server'

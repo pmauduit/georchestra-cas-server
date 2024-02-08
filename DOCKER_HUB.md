@@ -4,7 +4,7 @@
       [georchestra.org](https://www.georchestra.org/)
 
 -    **Where to get help**:  
-     the [Georchestra Github repo](https://github.com/georchestra/georchestra), [IRC chat](https://kiwiirc.com/nextclient/irc.libera.chat/georchestra), Stack Overflow
+     the [geOrchestra Github repo](https://github.com/georchestra/georchestra), [IRC chat](https://kiwiirc.com/nextclient/irc.libera.chat/georchestra), Stack Overflow
 
 # Featured tags
 
@@ -38,7 +38,7 @@ For this specific component, see the section `cas` in the [`georchestra/docker/d
 
 ## Where is it built
 
-This image is build using Dockerfile in `cas` repo. 
+This image is built using Dockerfile in `cas` repo. 
 
 # License
 
