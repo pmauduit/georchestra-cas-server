@@ -1,4 +1,4 @@
-FROM jetty:9.4-jre11
+FROM jetty:9.4-jre17
 
 LABEL "Organization"="geOrchestra"
 LABEL "Description"="CAS server webapp"
