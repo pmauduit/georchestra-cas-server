@@ -153,5 +153,5 @@ def getDebianVersion() {
     def commitId = 'git rev-parse --verify --short HEAD'.execute().text.trim()
     def branchName = 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
 
-    "${casServerVersion}.${branchName}.${new Date().format('yyyyMMddhhmm')}~${commitId}"
+    "${casServerVersion}.${branchName}.${new Date().format('yyyyMMddHHmm')}~${commitId}"
 }
