@@ -23,6 +23,14 @@ Custom georchestra build
 ./gradlew build
 ```
 
+## Building a debian package
+
+```
+./gradlew deb
+```
+
+The resulting deb is in `build/distributions/`
+
 ## Building a docker image
 
 Creating the exploded webapp with the following:
