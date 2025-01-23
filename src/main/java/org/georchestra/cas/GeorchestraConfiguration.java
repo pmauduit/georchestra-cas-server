@@ -20,10 +20,13 @@ public class GeorchestraConfiguration {
     @Value( "${useLegacyHeader:false}" )
     boolean useLegacyHeader = false;
 
+    @Value( "${headerConfigFile:}" )
+    String headerConfigFile;
+
     @Value( "${headerUrl:/header/}" )
     String headerUrl;
 
-    @Value("${headerHeight:90}")
+    @Value("${headerHeight:80}")
     String headerHeight;
 
     @Value("${headerScript:https://cdn.jsdelivr.net/gh/georchestra/header@dist/header.js}")
