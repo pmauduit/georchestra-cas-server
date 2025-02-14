@@ -17,14 +17,12 @@ EXPOSE 8080
 COPY --chown=jetty:jetty build/cas /var/lib/jetty/webapps/cas
 COPY --chown=jetty:jetty docker/docker-entrypoint.sh /
 
-ENV XMS=256M XMX=1G
-
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD ["sh", "-c", "exec java \
         -Djava.io.tmpdir=/tmp/jetty \
         -Dgeorchestra.datadir=/etc/georchestra \
-        -Xms$XMS -Xmx$XMX \
+        -XX:MaxRAMPercentage=80 -XX:+UseParallelGC \
         -XX:-UsePerfData \
         ${JAVA_OPTIONS} \
         -DCAS_BANNER_SKIP=true \
